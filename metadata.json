@@ -1,0 +1,6 @@
+{
+  "name": "JewelFinder",
+  "description": "Find nearby jewelry stores using your current location, view store details, ratings, opening hours, and get directions.",
+  "requestFramePermissions": ["geolocation"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -11,6 +11,7 @@ interface NavbarProps {
   favoriteCount: number;
   onToggleFavoritesOnly: () => void;
   showFavoritesOnly: boolean;
+  onToggleChat?: () => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
@@ -22,6 +23,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   favoriteCount,
   onToggleFavoritesOnly,
   showFavoritesOnly,
+  onToggleChat,
 }) => {
   return (
     <header className="sticky top-0 z-40 bg-stone-900/95 backdrop-blur-md border-b border-amber-900/30 text-stone-100 shadow-lg">
@@ -105,6 +107,18 @@ export const Navbar: React.FC<NavbarProps> = ({
                 </span>
               )}
             </button>
+
+            {/* AI Assistant Chatbot Button */}
+            {onToggleChat && (
+              <button
+                onClick={onToggleChat}
+                title="Ask AI Jewelry Assistant (n8n)"
+                className="flex items-center space-x-1 px-2.5 py-1.5 rounded-lg text-xs font-semibold bg-gradient-to-r from-amber-500/20 to-amber-600/20 hover:from-amber-500/30 hover:to-amber-600/30 text-amber-300 border border-amber-500/40 transition shadow-sm"
+              >
+                <Gem className="w-3.5 h-3.5 text-amber-400" />
+                <span className="hidden md:inline">AI Concierge</span>
+              </button>
+            )}
 
             {/* API Settings */}
             <button

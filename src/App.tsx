@@ -14,6 +14,7 @@ import { InteractiveMap } from './components/InteractiveMap';
 import { StoreDetailsModal } from './components/StoreDetailsModal';
 import { ManualLocationModal } from './components/ManualLocationModal';
 import { ApiSettingsModal } from './components/ApiSettingsModal';
+import { Chatbot } from './components/Chatbot';
 import { Footer } from './components/Footer';
 import { JewelryStore, UserLocation, FilterState, StoreCategory, SortOption } from './types/store';
 import { searchNearbyStoresOSM, reverseGeocode } from './services/placesService';
@@ -66,6 +67,7 @@ export default function App() {
   const [detailStore, setDetailStore] = useState<JewelryStore | null>(null);
   const [isManualModalOpen, setIsManualModalOpen] = useState(false);
   const [isApiSettingsOpen, setIsApiSettingsOpen] = useState(false);
+  const [isChatOpen, setIsChatOpen] = useState(false);
   const [mobileTab, setMobileTab] = useState<'list' | 'map'>('list');
 
   // Bookmarking favorites
@@ -409,6 +411,7 @@ export default function App() {
         favoriteCount={bookmarkedIds.size}
         onToggleFavoritesOnly={() => setShowFavoritesOnly((prev) => !prev)}
         showFavoritesOnly={showFavoritesOnly}
+        onToggleChat={() => setIsChatOpen((prev) => !prev)}
       />
 
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
@@ -585,6 +588,14 @@ export default function App() {
         onSaveGoogleKey={handleSaveGoogleKey}
         onSelectProvider={handleSelectProvider}
         currentKey={googleApiKey}
+      />
+
+      {/* n8n AI Chatbot Widget */}
+      <Chatbot
+        isOpen={isChatOpen}
+        onToggleOpen={setIsChatOpen}
+        userLocation={userLocation}
+        onSearchQuery={(q) => setFilters((prev) => ({ ...prev, query: q }))}
       />
     </div>
   );
